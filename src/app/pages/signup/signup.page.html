@@ -1,0 +1,83 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>signup</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-content-padding-10px">
+  <div class="register-form">
+    <div>
+      <h3 class="ion-text-center">Sign Up</h3>
+    </div>
+    <form  [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="txt-field">
+          <ion-item>
+              <ion-label position="floating">First name</ion-label>
+            <ion-input placeholder="First name" formControlName="fname"></ion-input>
+            <!-- <ion-icon name="person" slot="start"></ion-icon> -->
+          </ion-item>
+
+          <div *ngIf="submitted && valueControl.fname.errors">
+            <div *ngIf="valueControl.fname.errors?.required" class="err-msg">First name is required</div>
+        </div>
+
+          <ion-item>
+              <ion-label position="floating">Last name</ion-label>
+            <ion-input placeholder="Last name" formControlName="lname"></ion-input>
+            <!-- <ion-icon name="person" slot="start"></ion-icon> -->
+          </ion-item>
+
+          <div *ngIf="submitted && valueControl.lname.errors">
+            <div *ngIf="valueControl.lname.errors.required" class="err-msg">Last name is required</div>
+        </div>
+
+          <ion-item>
+              <ion-label position="floating">Enter Email</ion-label>
+            <ion-input placeholder="User name/Email" formControlName="email"></ion-input>
+            <!-- <ion-icon name="person" slot="start"></ion-icon> -->
+          </ion-item>
+
+          <div *ngIf="submitted && valueControl.email.errors">
+            <div *ngIf="valueControl.email.errors.required" class="err-msg">Email is required</div>
+            <div *ngIf="valueControl.email.errors.pattern" class="err-msg">Invalid email pattern</div>
+        </div>
+
+          <ion-item>
+              <ion-label position="floating">Password</ion-label>
+            <ion-input placeholder="Password" [type]="passwordType" formControlName="password"></ion-input>
+            <!-- <ion-icon name="lock-closed" slot="start"></ion-icon> -->
+            <ion-icon slot="end"  [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
+          </ion-item>
+
+          <div *ngIf="submitted && valueControl.password.errors">
+            <div *ngIf="valueControl.password.errors.required" class="err-msg">password is required</div>
+            <div *ngIf="valueControl.password.errors.pattern" class="err-msg">Password should be atleast 8 characters
+              long and should contain one number,one character and one special
+              character</div>
+          </div>
+        </div>
+      
+            <div class="open-accor" (click)="openInterest()">
+                <ion-label  position="floating" >Select Interest</ion-label>
+                <ion-icon *ngIf="!openinterest" name="chevron-down" slot="end"></ion-icon>
+                <ion-icon *ngIf="openinterest" name="chevron-up" slot="end"></ion-icon>
+            </div>
+         <div *ngIf="openinterest" >
+          <ion-item *ngFor="let item of interstList; let i = index;">
+            <ion-label>{{item.val}}</ion-label>
+            <ion-checkbox slot="start"  [value]="item.val"
+              (ionChange)="onSelectionChange($event,i)"></ion-checkbox>
+          </ion-item>
+        </div>
+        
+
+          <div *ngIf="submitted && valueControl.checkboxArrayList.errors">
+            <div *ngIf="valueControl.checkboxArrayList.errors.required" class="err-msg"> Please select Interest!</div>
+          </div>
+          <div>
+            <p>Already register! <a [routerLink]="['/signin']">Login</a></p>
+          </div>
+        <ion-button type="submit" display="block" >sign up</ion-button>
+    </form>
+  </div>
+</ion-content>
